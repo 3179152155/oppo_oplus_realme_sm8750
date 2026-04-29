@@ -125,9 +125,11 @@ jobs:
           rm -f ./ccache &
           
           echo "正在克隆源码仓库..."
-          aria2c -s16 -x16 -k1M https://github.com/cctv18/android_kernel_oneplus_mt6991/archive/refs/heads/oneplus/mt6991_v_15.0.2_ace5_ultra_6.6.89.zip -o common.zip && 
+          # 换成官方开源的 Pad 2 专属分支 (ColorOS 16 对应的大概率就是 6.6.89 基线)
+          aria2c -s16 -x16 -k1M https://github.com/OnePlusOSS/android_kernel_oneplus_mt6991/archive/refs/heads/oneplus/mt6991_b_16.0.0_pad_2.zip -o common.zip && 
           unzip -q common.zip && 
-          mv "android_kernel_oneplus_mt6991-oneplus-mt6991_v_15.0.2_ace5_ultra_6.6.89" common &&
+          # 注意文件夹名称对应修改
+          mv "android_kernel_oneplus_mt6991-oneplus-mt6991_b_16.0.0_pad_2" common &&
           rm -rf common.zip &
           
           echo "正在克隆llvm-clang18工具链..." &&
