@@ -406,6 +406,9 @@ jobs:
       - name: 添加 KSU & 其他配置项
         run: |
           cd kernel_workspace
+          # 下面这一行是新增的终极修复代码，直接干掉 BTF 编译
+          echo "CONFIG_DEBUG_INFO_BTF=n" >> ./common/arch/arm64/configs/gki_defconfig
+          
           echo "CONFIG_KSU=y" >> ./common/arch/arm64/configs/gki_defconfig
           if [[ ${{ github.event.inputs.kpm_enable }} == 'builtin' && ( "${{ github.event.inputs.ksu_type }}" == "sukisu" || "${{ github.event.inputs.ksu_type }}" == "resukisu" ) ]]; then
             echo "CONFIG_KPM=y" >> ./common/arch/arm64/configs/gki_defconfig
