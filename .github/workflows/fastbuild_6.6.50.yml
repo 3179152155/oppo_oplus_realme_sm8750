@@ -125,9 +125,11 @@ jobs:
           rm -f ./ccache &
           
           echo "正在克隆源码仓库..."
-          aria2c -s16 -x16 -k1M https://github.com/cctv18/android_kernel_oneplus_mt6991/archive/refs/heads/oneplus/mt6991_v_15.0.2_ace5_ultra.zip -o common.zip && 
+          # 1. 替换为官方 Pad 2 专属分支的下载链接
+          aria2c -s16 -x16 -k1M https://github.com/OnePlusOSS/android_kernel_oneplus_mt6991/archive/refs/heads/oneplus/mt6991_b_16.0.0_pad_2.zip -o common.zip && 
           unzip -q common.zip && 
-          mv "android_kernel_oneplus_mt6991-oneplus-mt6991_v_15.0.2_ace5_ultra" common &&
+          # 2. 关键：解压后的文件夹名变为 "仓库名-分支名"，分支名中的斜杠会被替换为短横线
+          mv "android_kernel_oneplus_mt6991-oneplus-mt6991_b_16.0.0_pad_2" common &&
           rm -rf common.zip &
           
           echo "正在克隆llvm-clang18工具链..." &&
